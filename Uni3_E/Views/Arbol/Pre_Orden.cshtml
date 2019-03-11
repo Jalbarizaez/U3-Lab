@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Uni3_E.Models.Nodo>
+@{
+    ViewBag.Title = "Pre_Orden";
+}
+
+<h2>Pre_Orden</h2>
+<table style="width:80%">
+
+    <tr>
+        <th>Id</th>
+        <th> Nombre</th>
+        <th> Descripcion</th>
+        <th> Casa Medica</th>
+        <th> Precio</th>
+        <th> Cantidad</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>@item.Medicamentos.Id</td>
+            <td>@item.Medicamentos.Nombre</td>
+            <td>@item.Medicamentos.Descripcion</td>
+            <td>@item.Medicamentos.CasaFarmaceutica</td>
+            <td>@item.Medicamentos.Precio</td>
+            <td>@item.Medicamentos.Cantidad</td>
+        </tr>
+    }
+</table>
+

@@ -1,0 +1,18 @@
+﻿@model Uni3_E.Models.Nodo
+    @{
+        ViewBag.Title = "RBusqueda";
+        string tmp = "";
+    }
+    @{ if (Model == null)
+        {
+            tmp = "El medicamento que esta buscando no se encuentra en el sistema";
+        }
+        else
+        {
+            tmp = "Id: " +Model.Medicamentos.Id.ToString() + " Nombre: " + Model.Medicamentos.Nombre + " Descripcion: " + Model.Medicamentos.Descripcion + " Casa Farmaceutica: " + Model.Medicamentos.CasaFarmaceutica + " Precio: $" + Model.Medicamentos.Precio.ToString() + " Cantidad: " + Model.Medicamentos.Cantidad.ToString();
+        }
+    } 
+<h2>El medicamento que busco es:</h2>
+<h2>@tmp</h2>
+
+
