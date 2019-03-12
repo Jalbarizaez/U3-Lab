@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <title>@ViewBag.Title - De click una vez sobre la pestaña iniciar para poder cargar informacion</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -17,13 +17,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Nombre de aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Iniciar aqui", "Bienvenida", "Arbol", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Busqueda", "Busqueda", "Arbol")</li>
+                    <li>@Html.ActionLink("Compra", "Compra", "Arbol")</li>
+                    <li>@Html.ActionLink("In_Orden", "In_Orden", "Arbol")</li>
+                    <li>@Html.ActionLink("Pre_Orden", "Pre_Orden", "Arbol")</li>
+                    <li>@Html.ActionLink("Post_Orden", "Post_Orden", "Arbol")</li>
+                    <li>@Html.ActionLink("Simulacion", "Simulacion", "Arbol")</li>
                 </ul>
             </div>
         </div>
@@ -32,7 +35,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+            <p>&copy; @DateTime.Now.Year - Eduardo Albarizaez</p>
         </footer>
     </div>
 

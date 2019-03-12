@@ -130,7 +130,7 @@ namespace Uni3_E.Models
         {
             return busqueda(cadena, Raiz);
         }
-        private Nodo Compra(string cadena, Nodo hoja,int cantidad)
+        private Nodo Compra(string cadena, Nodo hoja, int cantidad)
         {
 
             if (hoja != null)
@@ -138,16 +138,16 @@ namespace Uni3_E.Models
                 int tem = hoja.Medicamentos.Nombre.CompareTo(cadena);
                 if (cadena == hoja.Medicamentos.Nombre)
                 {
-                     hoja.Medicamentos.Cantidad = hoja.Medicamentos.Cantidad - cantidad;
+                    hoja.Medicamentos.Cantidad = hoja.Medicamentos.Cantidad - cantidad;
                     return hoja;
                 }
                 if (tem > 0)
                 {
-                     return Compra(cadena, hoja.Izquierdo,cantidad);
+                    return Compra(cadena, hoja.Izquierdo, cantidad);
                 }
                 else
                 {
-                     return Compra(cadena, hoja.Derecho,cantidad);
+                    return Compra(cadena, hoja.Derecho, cantidad);
                 }
             }
             else
@@ -155,9 +155,131 @@ namespace Uni3_E.Models
                 return null;
             }
         }
-        public Nodo Compra(string cadena,int cantidad)
+        public Nodo Compra(string cadena, int cantidad)
         {
-             return Compra(cadena, Raiz,cantidad);
+            return Compra(cadena, Raiz, cantidad);
+        }
+        //private Nodo Eliminar(string cadena , Nodo hoja, Nodo padre)
+        //{
+
+        //    if (hoja != null)
+        //    {
+        //        int tem = hoja.Medicamentos.Nombre.CompareTo(cadena);
+        //        if (cadena == hoja.Medicamentos.Nombre)
+        //        {
+        //            if (hoja.Derecho == null && hoja.Izquierdo == null)
+        //            {
+        //                int temp = padre.Medicamentos.Nombre.CompareTo(hoja.Medicamentos.Nombre);
+        //                if (temp > 0)
+        //                {
+        //                    padre.Izquierdo = null;
+        //                }
+        //                else
+        //                {
+        //                    padre.Derecho = null;
+        //                }
+        //                return hoja;
+        //            }
+        //            //else if (hoja.Derecho != null)
+        //            //{
+        //            //    padre.Derecho = hoja.Derecho;
+        //            //    return hoja;
+        //            //}
+        //            //else if (hoja.Izquierdo != null)
+        //            //{
+        //            //    padre.Izquierdo = hoja.Izquierdo;
+        //            //    return hoja;
+        //            //}
+        //            else if (hoja.Derecho != null && hoja.Izquierdo != null)
+        //            {
+
+        //            }
+        //        }
+        //        if (tem > 0)
+        //        {
+        //            return Eliminar(cadena, hoja.Izquierdo,hoja);
+        //        }
+        //        else
+        //        {
+        //            return Eliminar(cadena, hoja.Derecho,hoja);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        //}
+        //public Nodo Eliminar(string cadena)
+        //{
+        //    return Eliminar(cadena, Raiz,Raiz); 
+        //}
+        public void Eliminar(string cadena)
+        {
+            Eliminar(Raiz, cadena);
+        }
+        private void Eliminar(Nodo hoja, string cadena)
+        {
+            if (hoja != null)
+            {
+                int tem = hoja.Medicamentos.Nombre.CompareTo(cadena);
+
+                Nodo aux = null, aux1 = null, otro = null;
+                if (tem > 0)
+                {
+                    Eliminar(hoja.Izquierdo, cadena);
+                }
+                else
+                {
+                    if (tem < 0)
+                    {
+                        Eliminar(hoja.Derecho, cadena);
+                    }
+                    else
+                    {
+                        otro = hoja;
+
+
+                        if (otro != null)
+                        {
+                            if ((otro.Derecho == null) && (otro.Izquierdo == null))
+                            {
+                                otro = null;
+                            }
+                            else
+                            {
+                                if (otro.Derecho == null)
+                                {
+                                    hoja = otro.Izquierdo;
+
+                                }
+                                else
+                                    if (otro.Izquierdo == null)
+                                {
+                                    hoja = otro.Derecho;
+
+                                }
+                                else
+                                {
+                                    aux = otro.Izquierdo;
+                                    aux1 = aux;
+                                    while (aux.Derecho != null)
+                                    {
+                                        aux1 = aux;
+                                        aux = aux.Derecho;
+                                    }
+                                    otro.Medicamentos = aux.Medicamentos;
+                                    otro = aux;
+                                    aux1.Derecho = aux.Izquierdo;
+                                    aux = null;
+
+                                }
+                            }
+                        }
+                        else { }
+                    }
+
+                }
+            }
         }
     }
 }

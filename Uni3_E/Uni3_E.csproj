@@ -147,6 +147,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="App_Data\doc.csv" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -179,10 +180,10 @@
     <Content Include="Views\Arbol\RBusqueda.cshtml" />
     <Content Include="Views\Arbol\Compra.cshtml" />
     <Content Include="Views\Arbol\RCompra.cshtml" />
+    <Content Include="Views\Arbol\Simulacion.cshtml" />
+    <Content Include="Views\Arbol\Post_Orden.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -4,17 +4,19 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Serialization;
 using Uni3_E.Models;
 
 namespace Uni3_E.Controllers
 {
     public class ArbolController : Controller
     {
+        static List<Nodo> simulacion = new List<Nodo>();
         static Arbol_B Arbol = new Arbol_B();
         static private void archvio(Arbol_B arbol)
         {
             Arbol.Creacion();
-            using (StreamReader archivo = new StreamReader("C:/Users/jealb/OneDrive/Escritorio/doc.csv"))
+            using (StreamReader archivo = new StreamReader("C:/Users/jealb/OneDrive/Escritorio/doc.csv"))//Direccion del archivo modificado el archivo se encuentra en la carpeta app_data
             {
 
                 while (archivo.Peek() > -1)
@@ -60,12 +62,43 @@ namespace Uni3_E.Controllers
         }
         public ActionResult Pre_Orden()
         {
+            StreamWriter MyFile = new StreamWriter(@"C:/Users/jealb/OneDrive/Escritorio/json.json");//Direccion donde se creara el archivo json
+
+            XmlSerializer Serializer = new XmlSerializer(typeof(Nodo));
+
             var temporal = Arbol.pre_orden();
+            foreach (var item in temporal)
+            {
+                Nodo tmp = item;
+                Serializer.Serialize(MyFile, tmp);
+            }
             return View(temporal);
         }
         public ActionResult In_Orden()
         {
+            StreamWriter MyFile = new StreamWriter(@"C:/Users/jealb/OneDrive/Escritorio/json.json");//Direccion donde se creara el archivo json
+
+            XmlSerializer Serializer = new XmlSerializer(typeof(Nodo));
             var temporal = Arbol.in_orden();
+            foreach (var item in temporal)
+            {
+                Nodo tmp = item;
+                Serializer.Serialize(MyFile, tmp);
+            }
+            return View(temporal);
+        }
+        public ActionResult Post_Orden()
+        {
+            StreamWriter MyFile = new StreamWriter(@"C:/Users/jealb/OneDrive/Escritorio/json.json");//Direccion donde se creara el archivo json
+
+            XmlSerializer Serializer = new XmlSerializer(typeof(Nodo));
+            var temporal = Arbol.post_orden();
+            foreach(var item in temporal )
+            {
+                Nodo tmp = item;
+                Serializer.Serialize(MyFile, tmp);
+            }
+            
             return View(temporal);
         }
         public ActionResult Busqueda()
@@ -98,9 +131,32 @@ namespace Uni3_E.Controllers
             {
                 cadena = "No se pudo realizar la compra dado que supera la cantidad de medicamentos que posee el sistema";
             }
+            if(temporal.Medicamentos.Cantidad ==0)
+            {
+                Nodo sim = new Nodo();
+                sim = temporal;
+                simulacion.Add(sim);
+                Arbol.Eliminar(Request.Form["Nombre Medicamento"]);
+            }
+            
             Nodo respesta = new Nodo();
             respesta.Medicamentos.Nombre = cadena;
             return View(respesta);
+        }
+        public ActionResult Simulacion()
+        {
+            Random numro = new Random();
+            foreach(var item in simulacion)
+            {
+                Nodo temp = new Nodo();
+                temp = item;
+                temp.Izquierdo = null;
+                temp.Derecho = null;
+                temp.Medicamentos.Cantidad = numro.Next(0, 15);
+                Arbol.Insertar(temp);
+            }
+            simulacion.Clear();
+            return View();
         }
     }
 
